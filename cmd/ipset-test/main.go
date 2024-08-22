@@ -1,3 +1,4 @@
+//go:build linux
 // +build linux
 
 package main
@@ -10,7 +11,7 @@ import (
 	"os"
 	"sort"
 
-	"github.com/vishvananda/netlink"
+	"github.com/tailscale/netlink"
 )
 
 type command struct {
