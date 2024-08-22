@@ -28,6 +28,12 @@ type Rule struct {
 	IPProto           int
 	UIDRange          *RuleUIDRange
 	Protocol          uint8
+
+	// Type is the unix.RTN_* rule type, such as RTN_UNICAST
+	// or RTN_UNREACHABLE.
+	// When adding a new rule, zero means automatic.
+	// Only supported on Linux.
+	Type uint8
 }
 
 func (r Rule) String() string {
@@ -41,8 +47,8 @@ func (r Rule) String() string {
 		to = r.Dst.String()
 	}
 
-	return fmt.Sprintf("ip rule %d: from %s to %s table %d",
-		r.Priority, from, to, r.Table)
+	return fmt.Sprintf("ip rule %d: from %s to %s table %d%s",
+		r.Priority, from, to, r.Table, r.typeString())
 }
 
 // NewRule return empty rules.
