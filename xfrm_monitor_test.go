@@ -1,3 +1,4 @@
+//go:build linux
 // +build linux
 
 package netlink
@@ -5,7 +6,7 @@ package netlink
 import (
 	"testing"
 
-	"github.com/vishvananda/netlink/nl"
+	"github.com/tailscale/netlink/nl"
 )
 
 func TestXfrmMonitorExpire(t *testing.T) {
